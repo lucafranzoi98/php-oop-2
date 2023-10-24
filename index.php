@@ -2,13 +2,13 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('ROOT', __DIR__);
-define('DS', DIRECTORY_SEPARATOR);
-require_once ROOT . DS . 'classes' . DS . 'item.php';
-require_once ROOT . DS . 'models' . DS . 'items.php';
-require_once ROOT . DS . 'db.php';
+require __DIR__ . '/Models/Category.php';
+require __DIR__ . '/Models/Product.php';
+require __DIR__ . '/Models/Food.php';
+require __DIR__ . '/Models/Toy.php';
+require __DIR__ . '/Models/House.php';
+require __DIR__ . '/database/db.php';
 
-array_push($items, $biscuits, $ball, $litter, $dispenser, $rope, $bowl, $pillow, $scratcher)
 ?>
 
 <!DOCTYPE html>
@@ -24,19 +24,18 @@ array_push($items, $biscuits, $ball, $litter, $dispenser, $rope, $bowl, $pillow,
 
    <div class="container mb-5">
       <div class="row row-cols-4 gy-3">
-         <?php foreach ($items as $item) : ?>
+         <?php foreach ($products as $product) : ?>
          
          <div class="col">
             <div class="card h-100">
                <div style="height: 15rem" class="d-flex justify-content-center align-items-center">
-                  <img src="./img/<?= $item->getImg() ?>" class="card-img-top w-50">
+                  <img src="<?= $product->getImagePath() ?>" class="card-img-top w-50">
                </div>               
                <div class="card-body">
-                  <img src="./img/<?= $item->getCategory() ?>.png" style="width: 1rem">
-                  <h5 class="card-title"><?= $item->getName() ?></h5>
-                   <h6 class="card-subtitle mb-2 text-muted "><?= $item->getPrice() ?> $</h6>
-                  <p class="card-text"><?= $item->getDetails() ?></p>
-                  <h6 class="card-subtitle mb-2 text-muted "><?= $item->getType() ?></h6>
+                  <img src="<?= $product->category->getIcon() ?>" style="width: 1rem">
+                  <h5 class="card-title"><?= $product->getName() ?></h5>
+                   <h6 class="card-subtitle mb-2 text-muted "><?= $product->getPrice() ?> $</h6>
+                  <p class="card-text"><?= $product->getDescription() ?></p>
                </div>
             </div>
          </div>
