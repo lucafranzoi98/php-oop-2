@@ -2,10 +2,10 @@
 require_once __DIR__ . '/../Traits/Namable.php';
 
 class Product
-{   
+{
    use Namable;
 
-   public function __construct(protected int $id, protected string $name, protected float $price, Category $category, protected string $image, protected string $description)
+   public function __construct(protected int $id, protected string $name, protected /*float*/ $price, Category $category, protected string $image, protected string $description)
    {
       $this->id = $id;
       $this->name = $name;
@@ -14,7 +14,6 @@ class Product
       $this->image = $image;
       $this->description = $description;
    }
-
 
    public function getPrice(): string
    {
@@ -35,4 +34,13 @@ class Product
    {
       return $this->description;
    }
+
+   public function checkPrice()
+   {
+      if (!is_float($this->price)) {
+      throw new Exception("Wrong data type", 1);
+      }
+      return $this->price;
+   }
 }
+
